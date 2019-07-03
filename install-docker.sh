@@ -462,6 +462,20 @@ do_install() {
 			exit 1
 			;;
 	esac
+
+	# install docker-compose
+	$sh_c 'sudo curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose'
+	$sh_c 'sudo chmod +x /usr/local/bin/docker-compose'
+	$sh_c 'sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose'
+
+	# add user to docker group
+	$sh_c "sudo usermod -a -G docker $USER"
+
+	# Auto-start on boot
+	$sh_c "sudo systemctl enable docker # Auto-start on boot"
+
+	# Start right now
+	$sh_c "sudo systemctl start docker"
 	exit 1
 }
 
