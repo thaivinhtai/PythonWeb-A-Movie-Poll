@@ -70,6 +70,31 @@ command_exists() {
 	command -v "$@" > /dev/null 2>&1
 }
 
+install_compose() {
+	cat >&2 <<-'EOF'
+		Install docker-compose.
+	EOF
+	# install docker-compose
+	sudo curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+	sudo chmod +x /usr/local/bin/docker-compose
+	sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+
+	# add user to docker group
+	sudo usermod -a -G docker $USER
+
+	# Auto-start on boot
+	sudo systemctl enable docker # Auto-start on boot
+
+	# Start right now
+	sudo systemctl start docker
+
+	sleep 10
+
+	cat >&2 <<-'EOF'
+		Install completed.
+	EOF
+}
+
 is_dry_run() {
 	if [ -z "$DRY_RUN" ]; then
 		return 1
@@ -222,34 +247,15 @@ do_install() {
 		fi
 
 		cat >&2 <<-'EOF'
-			Warning: the "docker" command appears to already exist on this system.
-
-			If you already have Docker installed, this script can cause trouble, which is
-			why we're displaying this warning and provide the opportunity to cancel the
-			installation.
-
-			If you installed the current Docker package using this script and are using it
+			The "docker" command appears to already exist on this system.
 		EOF
 
-		if [ $shouldWarn -eq 1 ]; then
-			cat >&2 <<-'EOF'
-			again to update Docker, we urge you to migrate your image store before upgrading
-			to v1.10+.
-
-			You can find instructions for this here:
-			https://github.com/docker/docker/wiki/Engine-v1.10.0-content-addressability-migration
-			EOF
-		else
-			cat >&2 <<-'EOF'
-			again to update Docker, you can safely ignore this message.
-			EOF
+		# check if there is no docker-compse, install it.
+		if ! command_exists docker-compose; then
+			install_composes
 		fi
-
-		cat >&2 <<-'EOF'
-
-			You may press Ctrl+C now to abort this script.
-		EOF
-		( set -x; sleep 20 )
+		sudo docker-compose up
+		exit 0
 	fi
 
 	user="$(id -un 2>/dev/null || true)"
@@ -383,6 +389,8 @@ do_install() {
 				$sh_c "apt-get install -y -qq --no-install-recommends docker-ce$pkg_version >/dev/null"
 			)
 			echo_docker_as_nonroot
+			install_compose
+			sudo docker-compose up
 			exit 0
 			;;
 		centos|fedora)
@@ -453,6 +461,8 @@ do_install() {
 				$sh_c "$pkg_manager install -y -q docker-ce$pkg_version"
 			)
 			echo_docker_as_nonroot
+			install_composes
+			sudo docker-compose up
 			exit 0
 			;;
 		*)
@@ -462,20 +472,6 @@ do_install() {
 			exit 1
 			;;
 	esac
-
-	# install docker-compose
-	$sh_c 'sudo curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose'
-	$sh_c 'sudo chmod +x /usr/local/bin/docker-compose'
-	$sh_c 'sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose'
-
-	# add user to docker group
-	$sh_c "sudo usermod -a -G docker $USER"
-
-	# Auto-start on boot
-	$sh_c "sudo systemctl enable docker # Auto-start on boot"
-
-	# Start right now
-	$sh_c "sudo systemctl start docker"
 	exit 1
 }
 
