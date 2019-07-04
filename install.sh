@@ -252,7 +252,7 @@ do_install() {
 
 		# check if there is no docker-compse, install it.
 		if ! command_exists docker-compose; then
-			install_composes
+			install_compose
 		fi
 		sudo docker-compose up
 		exit 0
@@ -461,7 +461,7 @@ do_install() {
 				$sh_c "$pkg_manager install -y -q docker-ce$pkg_version"
 			)
 			echo_docker_as_nonroot
-			install_composes
+			install_compose
 			sudo docker-compose up
 			exit 0
 			;;

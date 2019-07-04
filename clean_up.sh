@@ -98,6 +98,7 @@ do_cleanup() {
   # uninstall docker-compose
   if [ "$delete_compose" = "y" ]; then
     sudo rm -rf /usr/local/bin/docker-compose
+		sudo rm -rf /usr/bin/docker-compose
   fi
   exit 0
 }

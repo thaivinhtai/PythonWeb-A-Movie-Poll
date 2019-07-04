@@ -5,17 +5,11 @@ services:
     image: postgres
   web:
     build: .
-    command: python manage.py runserver 0.0.0.0:8000
-    # command: python manage.py migrate
+    command: "python manage.py runserver 0.0.0.0:8000"
     volumes:
       - .:/code
     ports:
       - "8000:8000"
     depends_on:
       - db
-    # command: cd /code/
-    # command: python manage.py migrate
-    # command: python manage.py makemigrations polls
-    # command: python manage.py migrate
-    # command: python manage.py sqlmigrate polls 0001
-    # command: python manage.py migrate
+    entrypoint: "bash /code/migrate.sh"
