@@ -21,6 +21,10 @@ Recently, Docker emerged and was supposed to be able to solve both problems. If 
 
 ### Release 1.0.0:
 
+#### Objective:
+    Investigate how the Django framework works.
+    Deploy Django service automaticaly 
+
 #### features in this release:
     - login as an admin to add, modify, remove the poll.
     - vote
