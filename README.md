@@ -19,6 +19,12 @@ Another solution is that Vagrant can solve the code update problem on this virtu
 
 Recently, Docker emerged and was supposed to be able to solve both problems. If that's the case, then we can safely use Docker in our work. We will try to use Docker to see what it can do.
 
+### Release 1.0.0:
+
+#### features in this release:
+    - login as an admin to add, modify, remove the poll.
+    - vote
+
 ### Deploy "The Intek Movie Friday Night Poll with Basic Web Server" project:
 
 #### To deploy the project:
@@ -28,3 +34,4 @@ Recently, Docker emerged and was supposed to be able to solve both problems. If 
 #### To clean-up:
     ``` sudo sh clean_up.sh
     ```
+
