@@ -23,7 +23,7 @@ Recently, Docker emerged and was supposed to be able to solve both problems. If 
 
 #### Objective:
     Investigate how the Django framework works.
-    Deploy Django service automaticaly b
+    Deploy Django service automaticaly by using Docker
 
 #### features in this release:
     - login as an admin to add, modify, remove the poll.
