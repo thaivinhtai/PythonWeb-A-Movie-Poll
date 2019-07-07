@@ -1,109 +1,28 @@
 # Basic Web Server: A Movie Poll
 
-#### Intro
-
 ### Intro
 
-You have been through a very long journey with Python as a developer until now!
-
-Let it be fun games, the notorious shell or head breaking algorithms. You’re also get familiar with Object Oriented Programing through the Graph.
-
-For now, you will be guild into a whole new world of Web development with Python through this project: the glorious **"The Intek Movie Friday Night Poll with Basic Web Server"** project.
-
-As the name suggested, in this project you’ll be asked to install and config a simple Django webserver and build a simple polling application with Django framework.
-
-As this is your very first python web project. The subject will include very detail instructions with step by step approach to guild you.
-
-But please remember that the subject gives you a lot of materials doesn’t mean you just need to copy and paste. You have to understand clearly your setups, configs, or coding.
-
-And finally, this project is very practical as we can use it to vote for what movie will be screen every Friday. We will have a beauty contest to choose the best functional and visual beauty to deploy for our use.
-
-### Requirement
-
-This project consisted of two parts.
-
-### Part 1:
-
-In part 1, you have to install the Django framework into your local machine and do some setting & config with it.
-
-**Step 1:** check python installed version and install `virtualenv` with `pip`, enable the `virtualenv`.
-
-- Install `virtualenv` is a good practice to create an isolated sandbox environment for your web development, but it is optional, you can still install Django into global scope if you want.
-
-**Step 2:** install Django, creating a project name with name “pythonweb”, creating an app with name “moviepoll”.
-
-- In this step you must get familiar with the project and app skeleton structure, mean you have to know the folder and files structure Django created after you use the command and the functions of each file.
-
-**Step 3:** Edit the `setting.py` to change timezone to Viet Nam, add “moviepoll” to installed apps, run initial migration, run server, edit `url.py` to include the route of “moviepoll” app.
-
-- You must understand the timezone format used in setting, know about the default apps and how to added new apps, what is route and how to add new one, what is the initial migration and why you have to run it. And finally, of course you have to know how to run the server and check everything are working fine.
+Recently, the concept of container virtualization is mentioned a lot. And Docker is also emerging as a phenomenon and used by a lot of people.
 
 
+### Use docker to develop Django
 
-### Part 2:
+Typically, when developing Django applications in particular and Python applications in general, we often use the virtual environment of Python (virtualenv or venv). The purpose of this is to create an isolated environment for the application. Separate it from the rest of the system, to ensure that our application development does not affect the system at all.
 
-In part 2, you have to build a simple web application called the **“The Intek Movie Friday Night Poll”** using Django framework.
+However, Web applications that use Django or any other framework, it's not enough to use virtual environments for Python alone. Because in addition to the necessary Python packages, there are many other components, such as databases (PostgreSQL, MySQL, ...), cache (memcached, Redis, ...), etc. Many times, we want to configure the production environment to test it before officially running the application, without having the conditions or the need to rent a real server, we need other solutions.
 
-***Features of the app:***
+The usual solution is to use virtual machines. We can use programs like VirtualBox or VMWare and install on a personal computer a Linux virtual machine as much as the server. And we will also log in there, get the code for installing and configuring everything to make our Web site work.
 
-**Name:** Intek Movie Friday Poll app
+The problem is, such a virtual machine will take up a lot of system resources. And with a personal computer, when it is possible to run a virtual machine, the real machine can't do anything else. Also, during the development process, every time we want to update the new code, we have to do a decent job of pushing code, then login to the virtual machine and pull the code back.
 
-**Pages:**
+Another solution is that Vagrant can solve the code update problem on this virtual machine. It has a good mechanism to allow the project file and folder system to be synchronized into the virtual machine, so the code will be updated almost immediately. However, Vagrant also uses a third-party service such as VirtualBox to run a virtual machine, so the problem of consuming system resources is still unresolved.
 
-- *Index page:* show a list of poll questions (ie: “What to see on Friday 2019/01/11”), each question has a link to the poll detail.
-- *Detail page:* show the questions, a list of radio button with movie name for that poll question and a submit button. People have to choose an option before submit.
-- *Result page:* the page to display result after the user submit a poll.
+Recently, Docker emerged and was supposed to be able to solve both problems. If that's the case, then we can safely use Docker in our work. We will try to use Docker to see what it can do.
 
-**Data:**
+### Deploy "The Intek Movie Friday Night Poll with Basic Web Server" project:
 
-- Data will be saved with `SQLite` (default data engine of Django) and using the Build in ORM and admin page of Django.
-- Data model:
+####To deploy the project:
+    ```sudo sh install.sh````
 
-![](https://i.imgur.com/q4VPcS6.jpg)
-
-### Step by step guild of part 2:
-
-Because this is the first web project, a step by step guild will be provided to you. Hint:
-
-- There is an official Django tutorial for each step of making this poll app, it’s one of the reasons the poll app is chosen as your first Django web app project.
-- When you follow the tutorial, remember to read carefully and understand what you’re doing.
-
-**Step 1:** Create project & poll app:
-
-- Should be done in part 1, re do with correct name if needed.
-
-**Step 2:** Database setup, creating models, activating models, creating and running migrations, try interacting with the data through shell.
-
-- This part is one of the most difficult one, have to read a lot, try a lot to understand and do-able.
-
-**Step 3:** Config and using the build-in admin site to add and manipulate data.
-
-- If done step 2, this step will be not so hard.
-
-**Step 4:** Creating the views, using the template:
-
-- This step requires a lot reading to understand what a view & template are and the basic of request & response in Django, learn to write basic view using template, write python code to read the data models, using Render, return 404 and other errors, using URL template and path.
-
-**Step 5:** Writing and processing form:
-
-- Must learn basic about HTML form and POST method of HTTP. Write a form template. Use python to catch and process the form data.
-
-**Step 6:** Customize look and feels:
-
-- Learn how to serve static file in Django, add simple background image and css file to the project.
-
-
-
----
-
-
-
-#### Bonus
-
-###### Notions: html, css, static file, and django
-
-### Make the Poll more beauty with HTML & CSS
-
-Just make our Movie Poll more beauty. Try leaning some basic HTML & CSS by your self and applied it to your Poll.
-
-![](https://i.imgur.com/oYHh4j5.gif)
+#### To clean-up:
+    ```sudo sh clean_up.sh```

@@ -1,14 +1,25 @@
-<!-- {% load static %}
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Poll</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}">
+  </head>
 
-<link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}"> -->
-
-{% if latest_question_list %}
-    <ul>
-    {% for question in latest_question_list %}
-        <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No polls are available. Login to admin page to add poll.</p>
-    <meta http-equiv="refresh" content="0; url=http://127.0.0.1:8000/admin/" />
-{% endif %}
+  <body>
+    <fieldset>
+      {% if latest_question_list %}
+        <legend>List</legend>
+        <ul>
+          {% for question in latest_question_list %}
+            <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
+          {% endfor %}
+        </ul>
+        {% else %}
+            <p>No polls are available. Login to admin page to add poll. Redirect after 3s.</p>
+            <meta http-equiv="refresh" content="3; url=http://127.0.0.1:8000/admin/" />
+        {% endif %}
+    </fieldset>
+    <button type="button" onclick="window.location.href = 'http://127.0.0.1:8000/admin/';">Admin page</button>
+  </body>
+</html>
