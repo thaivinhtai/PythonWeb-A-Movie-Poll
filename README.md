@@ -32,5 +32,7 @@ Recently, Docker emerged and was supposed to be able to solve both problems. If 
 #### Use the polls app:
 
 username: admin
+
 password: admin
+
 polls/homepage url: http://127.0.0.1:8000
