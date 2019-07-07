@@ -21,8 +21,10 @@ Recently, Docker emerged and was supposed to be able to solve both problems. If 
 
 ### Deploy "The Intek Movie Friday Night Poll with Basic Web Server" project:
 
-####To deploy the project:
-    ```sudo sh install.sh````
+#### To deploy the project:
+    ```sudo sh install.sh
+    ```
 
 #### To clean-up:
-    ```sudo sh clean_up.sh```
+    ```sudo sh clean_up.sh
+    ```
