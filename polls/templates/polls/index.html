@@ -1,6 +1,6 @@
-{% load static %}
+<!-- {% load static %}
 
-<link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}"> -->
 
 {% if latest_question_list %}
     <ul>
@@ -9,5 +9,6 @@
     {% endfor %}
     </ul>
 {% else %}
-    <p>No polls are available.</p>
+    <p>No polls are available. Login to admin page to add poll.</p>
+    <meta http-equiv="refresh" content="0; url=http://127.0.0.1:8000/admin/" />
 {% endif %}
