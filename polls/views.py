@@ -4,8 +4,10 @@ from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
 
-from .models import Choice, Question
+from rest_framework import viewsets
 
+from .models import Choice, Question
+from .serializers import ChoiceSerializer, QuestionSerializer
 
 # Create your views here.
 class IndexView(generic.ListView):
@@ -57,3 +59,13 @@ def vote(request, question_id):
         # user hits the Back button.
         return HttpResponseRedirect(reverse('polls:results',
                                             args=(question.id,)))
+
+
+class QuestionViewSet(viewsets.ModelViewSet):
+    queryset = Question.objects.all()
+    serializer_class = ImageSerializer
+
+
+class ChoiceViewSet(viewsets.ModelViewSet):
+    queryset = Choice.objects.all()
+    serializer_class = ChoiceSerializer
