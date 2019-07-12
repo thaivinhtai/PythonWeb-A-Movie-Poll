@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import path
 
 from rest_framework.routers import DefaultRouter
-from image.views import QuestionViewSet, ChoiceViewSet
+# from .views import QuestionViewSet, ChoiceViewSet
 
 
 from . import views
@@ -16,5 +16,6 @@ urlpatterns = [
     # ex: /polls/5/results/
     path('<int:pk>/results/', views.ResultsView.as_view(), name='results'),
     # ex: /polls/5/vote/
-    path('<int:question_id>/vote/', views.vote, name='vote'),
+    # path('<int:question_id>/vote/', views.vote, name='vote'),
+
 ]

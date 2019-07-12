@@ -61,11 +61,11 @@ def vote(request, question_id):
                                             args=(question.id,)))
 
 
-class QuestionViewSet(viewsets.ModelViewSet):
-    queryset = Question.objects.all()
-    serializer_class = ImageSerializer
-
-
-class ChoiceViewSet(viewsets.ModelViewSet):
-    queryset = Choice.objects.all()
-    serializer_class = ChoiceSerializer
+# class QuestionViewSet(viewsets.ModelViewSet):
+#     queryset = Question.objects.all()
+#     serializer_class = QuestionSerializer
+#
+#
+# class ChoiceViewSet(viewsets.ModelViewSet):
+#     queryset = Choice.objects.all()
+#     serializer_class = ChoiceSerializer
